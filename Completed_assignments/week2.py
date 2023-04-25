@@ -1,6 +1,6 @@
-####                           before running the code,                          ###
-###                              Put iris_full.csv in                             ##
-##                                 the script's Dir                                #
+####                           before running the code,                          ####
+###                              Put iris_full.csv in                             ###
+##                                 the script's Dir.                               ##
 
 import pandas as pd
 from sklearn.preprocessing import normalize as sk_normalize
@@ -11,15 +11,15 @@ iris_df=pd.read_csv("iris_full.csv", sep=',',index_col=0)
 target_col,metadata_col=["species"],["collecting researcher"]
 feature_col=["sepal length (cm)","sepal width (cm)","petal length (cm)","petal width (cm)"]
 
-### setting x,y,meta
-x,y,meta=iris_df.loc[:,feature_col],iris_df.loc[:,target_col],iris_df.loc[:,metadata_col]
+### setting x,y,meta variables
+x,y,meta=iris_df.loc[:,feature_col], iris_df.loc[:,target_col], iris_df.loc[:,metadata_col]
 
 ### normalization
 x_normed=sk_normalize(x,norm='l2',axis=1)
 x.loc[:,:]=x_normed
 
 ### Learning
-log_model=sk_LogisticRegression()
+log_model=sk_LogisticRegression(penalty=None)
 log_model.fit(x,y)
 
 ### checking accuracy and creating output
@@ -37,4 +37,4 @@ for i in range(total_count):
 results_txt+="\nAccuracy: " + str(correct_pred_count/total_count)
 
 with open ('prediction.txt', 'w') as file:  
-    file.write(results_txt)  
+    file.write(results_txt) 
